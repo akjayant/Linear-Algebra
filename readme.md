@@ -1,4 +1,4 @@
-## Linear Algebra coding assignments as a part of E0-226 course at CSA,IISc,Bangalore
+## Linear Algebra coding assignments as a part of E0-226 course @ CSA,IISC Bangalore
  #### We had to code everything from scratch i.e, no numpy!
 
  ### Assignment - 1
