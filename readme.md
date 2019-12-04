@@ -9,5 +9,5 @@
      1) Eigen Values and Eigen Vectors using QR Algorithm
      2) Centrality measures - Degree, Closeness and Eigenvector
      3) Spectral Clustering
-     4) SVD  (Numpy allowed just for calculating eigen space and matrix multiplication)
+     4) Truncated-SVD & renconstruction error plot  (Numpy allowed just for calculating eigen space and matrix multiplication)
      5) t-SNE (just for visualization)
