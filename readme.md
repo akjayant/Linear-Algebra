@@ -1,5 +1,5 @@
 ## Linear Algebra coding assignments as a part of E0-226 course @ CSA,IISC Bangalore
- #### We had to code everything from scratch i.e, no numpy forget sklearn!
+ #### Task is to code everything from scratch i.e, no numpy & other libraries
 
  ### Assignment - 1
      1) Gauss Jordan for echleon forms
