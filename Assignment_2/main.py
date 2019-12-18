@@ -371,13 +371,14 @@ def problem_3(path):
     v = sorted_eigenvecs[1]
     v = [v[i][0] for i in range(len(v))]
     labels_1 = kmeans_scratch(v,mean(v))
-    colors = [0]*22
+    colors = [0]*len(labels_1)
     for key,value in labels_1.items():
         colors[key]=value
     colors = ['yellow' if i==1 else 'pink' for i in colors]
     g = nx.from_numpy_matrix(el_classico_matrix)
     plt.figure(1,figsize=(15,7))
-    plt.title("Barca - Real Madrid clustered (#ValverdeOut) \nTeam 1 = "+str(colors.count('yellow'))+" players\nTeam 2 = "+str(colors.count('pink'))+" players")
+    #print(labels_list)
+    #plt.title("Barca - Real Madrid clustered (#ValverdeOut) \nTeam 1 = "+str(colors.count('yellow'))+" players\nTeam 2 = "+str(colors.count('pink'))+" players")
     nx.draw(g,with_labels=True,font_weight='bold',font_color='black',node_color=colors,labels=labels,node_size=1190)
     plt.show()
     
@@ -390,28 +391,34 @@ def problem_4a(path):
     d_list=[2,5,10,20,50,100,150,200,400,500]
     rmse_list=[]
     r = random.randint(50,100)
+    x = data[:,1:]
+    d=784
+    U,S,V = svd_scratch(x,d)  
     for d in d_list:
-        x= data[:,r:d+1]
-        U,S,V = svd_scratch(x,d)
+        U_ = U[:,:d]
+        S_ = S[:d,:d]
+        V_ = V[:d,:d]
         print("------------------------------------------------------------------------")
         print('for d='+str(d))
         print("Original matrix =")
-        print(x)
+        print(x.shape)
         print("U=")
-        print(U)
+        print(U.shape)
         print("S=")
-        print(S)
+        print(S.shape)
         print("V=")
-        print(V)
-        x_svd=reconst(U,S,V)
+        print(V.shape)
+        x_svd=reconst(U_,S_,V_)
+        print(x_svd.shape)
+        x_svd_r = np.zeros(x.shape)
         print("Reconstructed matrix=")
-        print(x_svd)
-        rmse_list.append(rmse(x,x_svd))
+        x_svd_r[:x_svd.shape[0],:x_svd.shape[1]]=x_svd
+        rmse_list.append(rmse(x,x_svd_r))
     print("------------------------------------------------------------------------------")
     print("rmse for d=2,5,10,20,50,100,150,200,400,500 - ")
     print(rmse_list)
-    plt.title("  X-axis: Values of d and Y-axis :RMSEs *(scale is 1e-7)")
-    plt.ylim(top=1e-7)
+    plt.title("  X-axis: Values of d and Y-axis :RMSEs")
+    #plt.ylim(top=1e-7)
     plt.scatter(d_list,rmse_list)
     plt.show()
 
